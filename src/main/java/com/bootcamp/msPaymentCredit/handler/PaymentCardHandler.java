@@ -1,8 +1,10 @@
 package com.bootcamp.msPaymentCredit.handler;
 
+import com.bootcamp.msPaymentCredit.models.dto.TransactionActiveDTO;
 import com.bootcamp.msPaymentCredit.models.entities.PaymentCard;
 import com.bootcamp.msPaymentCredit.services.ICreditCardDTOService;
 import com.bootcamp.msPaymentCredit.services.IPaymentCardService;
+import com.bootcamp.msPaymentCredit.services.ITransactionDTOService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,9 @@ public class PaymentCardHandler {
 
     @Autowired
     private ICreditCardDTOService creditService;
+
+    @Autowired
+    private ITransactionDTOService transactionService;
 
     public Mono<ServerResponse> findAll(ServerRequest request){
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
@@ -56,7 +61,13 @@ public class PaymentCardHandler {
                     credit.setTotalConsumption(0.0);
                 }
                     return creditService.updateCredit(credit);
-                }).flatMap(payment ->  service.create(paymentRequest)))
+                }).flatMap(creditTransaction -> {
+                            TransactionActiveDTO transaction = new TransactionActiveDTO();
+                            transaction.setTypeoftransaction("PAYMENT");
+                            transaction.setTransactionAmount(paymentRequest.getAmount());
+                            transaction.setIdentityNumber(paymentRequest.getIdentityNumber());
+                            return transactionService.saveTransaction(transaction);
+                        }).flatMap(payment ->  service.create(paymentRequest)))
                 .flatMap( c -> ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)

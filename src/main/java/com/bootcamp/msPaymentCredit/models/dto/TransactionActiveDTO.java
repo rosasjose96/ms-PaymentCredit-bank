@@ -1,26 +1,25 @@
-package com.bootcamp.msPaymentCredit.models.entities;
+package com.bootcamp.msPaymentCredit.models.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document(collection = "paymentCard")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentCard {
-
-    @Id
-    private String id;
+public class TransactionActiveDTO {
+    private String typeoftransaction;
 
     private String identityNumber;
 
-    private double amount;
+    private double transactionAmount;
+
+    private String idProductoCredit;
+
+    private String transactionDescription;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateOperation = LocalDateTime.now();

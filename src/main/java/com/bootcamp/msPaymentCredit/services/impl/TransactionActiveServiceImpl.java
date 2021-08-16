@@ -5,6 +5,7 @@ import com.bootcamp.msPaymentCredit.services.ITransactionDTOService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,19 +15,17 @@ import reactor.core.publisher.Mono;
 public class TransactionActiveServiceImpl implements ITransactionDTOService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransactionActiveServiceImpl.class);
-    private final WebClient.Builder client;
 
     @Autowired
-    public TransactionActiveServiceImpl(WebClient.Builder client) {
-        this.client = client;
-    }
+    @Qualifier("client")
+    private WebClient.Builder client;
 
     @Override
     public Mono<TransactionActiveDTO> saveTransaction(TransactionActiveDTO transaction) {
         LOGGER.info("initializing Transaction create");
 
         return client
-                .baseUrl("http://localhost:8095/api/transaction")
+                .baseUrl("http://TRANSACTION-SERVICE/api/transaction")
                 .build()
                 .post()
                 .accept(MediaType.APPLICATION_JSON)

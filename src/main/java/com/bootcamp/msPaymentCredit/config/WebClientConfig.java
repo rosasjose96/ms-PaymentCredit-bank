@@ -9,8 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
-    @Value("${config.base.endpoint.customer}")
-    private String url;
 
     @Bean(name = "client")
     @LoadBalanced

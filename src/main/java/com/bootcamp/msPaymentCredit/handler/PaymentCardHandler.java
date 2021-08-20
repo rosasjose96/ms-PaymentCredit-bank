@@ -16,6 +16,9 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+/**
+ * The type Payment card handler.
+ */
 @Slf4j(topic = "payment_handler")
 @Component
 public class PaymentCardHandler {
@@ -31,11 +34,23 @@ public class PaymentCardHandler {
     @Autowired
     private ITransactionDTOService transactionService;
 
+    /**
+     * Find all mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> findAll(ServerRequest request){
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                 .body(service.findAll(), PaymentCard.class);
     }
 
+    /**
+     * Find payment card mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> findPaymentCard(ServerRequest request) {
         String id = request.pathVariable("id");
         return service.findById(id).flatMap((c -> ServerResponse
@@ -46,6 +61,12 @@ public class PaymentCardHandler {
         );
     }
 
+    /**
+     * New payment card mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> newPaymentCard(ServerRequest request){
 
         Mono<PaymentCard> paymentCardMono = request.bodyToMono(PaymentCard.class);
@@ -74,6 +95,12 @@ public class PaymentCardHandler {
                 .body(BodyInserters.fromValue(c)));
     }
 
+    /**
+     * Delete payment card mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> deletePaymentCard(ServerRequest request){
 
         String id = request.pathVariable("id");
@@ -86,6 +113,12 @@ public class PaymentCardHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
+    /**
+     * Update payment card mono.
+     *
+     * @param request the request
+     * @return the mono
+     */
     public Mono<ServerResponse> updatePaymentCard(ServerRequest request){
         Mono<PaymentCard> paymentCardMono = request.bodyToMono(PaymentCard.class);
         String id = request.pathVariable("id");

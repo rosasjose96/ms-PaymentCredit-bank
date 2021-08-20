@@ -10,9 +10,18 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
+/**
+ * The type Router config.
+ */
 @Configuration
 public class RouterConfig {
 
+    /**
+     * Routes router function.
+     *
+     * @param paymentCardHandler the payment card handler
+     * @return the router function
+     */
     @Bean
     public RouterFunction<ServerResponse> routes(PaymentCardHandler paymentCardHandler){
 

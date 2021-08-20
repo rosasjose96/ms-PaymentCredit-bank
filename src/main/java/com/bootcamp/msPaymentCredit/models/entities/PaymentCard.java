@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+/**
+ * The type Payment card.
+ */
 @Document(collection = "paymentCard")
 @Getter
 @Setter

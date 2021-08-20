@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+/**
+ * The type Transaction active service.
+ */
 @Service
 public class TransactionActiveServiceImpl implements ITransactionDTOService {
 

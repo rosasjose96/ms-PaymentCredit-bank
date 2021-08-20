@@ -2,6 +2,9 @@ package com.bootcamp.msPaymentCredit.models.dto;
 
 import lombok.*;
 
+/**
+ * The type Credit card dto.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

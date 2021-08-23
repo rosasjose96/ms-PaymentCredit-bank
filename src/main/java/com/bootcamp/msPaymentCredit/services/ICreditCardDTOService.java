@@ -13,7 +13,7 @@ public interface ICreditCardDTOService {
      * @param credit the credit
      * @return the mono
      */
-    public Mono<CreditCardDTO> updateCredit(CreditCardDTO credit);
+    Mono<CreditCardDTO> updateCredit(CreditCardDTO credit);
 
     /**
      * Find by pan mono.
@@ -21,5 +21,5 @@ public interface ICreditCardDTOService {
      * @param pan the pan
      * @return the mono
      */
-    public Mono<CreditCardDTO> findByPan(String pan);
+    Mono<CreditCardDTO> findByPan(String pan);
 }

@@ -1,6 +1,6 @@
 package com.bootcamp.msPaymentCredit.services.impl;
 
-import com.bootcamp.msPaymentCredit.models.dto.TransactionActiveDTO;
+import com.bootcamp.msPaymentCredit.models.dto.TransactionDTO;
 import com.bootcamp.msPaymentCredit.services.ITransactionDTOService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class TransactionActiveServiceImpl implements ITransactionDTOService {
     private WebClient.Builder client;
 
     @Override
-    public Mono<TransactionActiveDTO> saveTransaction(TransactionActiveDTO transaction) {
+    public Mono<TransactionDTO> saveTransaction(TransactionDTO transaction) {
         LOGGER.info("initializing Transaction create");
 
         return client
@@ -35,7 +35,7 @@ public class TransactionActiveServiceImpl implements ITransactionDTOService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(transaction)
                 .retrieve()
-                .bodyToMono(TransactionActiveDTO.class);
+                .bodyToMono(TransactionDTO.class);
     }
 
 }

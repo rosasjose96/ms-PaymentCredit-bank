@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TransactionActiveDTO {
+public class TransactionDTO {
     private String typeoftransaction;
 
     private String identityNumber;

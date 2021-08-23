@@ -1,6 +1,6 @@
 package com.bootcamp.msPaymentCredit.handler;
 
-import com.bootcamp.msPaymentCredit.models.dto.TransactionActiveDTO;
+import com.bootcamp.msPaymentCredit.models.dto.TransactionDTO;
 import com.bootcamp.msPaymentCredit.models.entities.PaymentCard;
 import com.bootcamp.msPaymentCredit.services.ICreditCardDTOService;
 import com.bootcamp.msPaymentCredit.services.IPaymentCardService;
@@ -83,7 +83,7 @@ public class PaymentCardHandler {
                 }
                     return creditService.updateCredit(credit);
                 }).flatMap(creditTransaction -> {
-                            TransactionActiveDTO transaction = new TransactionActiveDTO();
+                            TransactionDTO transaction = new TransactionDTO();
                             transaction.setTypeoftransaction("PAYMENT");
                             transaction.setTransactionAmount(paymentRequest.getAmount());
                             transaction.setIdentityNumber(paymentRequest.getIdentityNumber());
